@@ -34,4 +34,5 @@ export const students = [
     { id: 3, name: "Марія", score: 80, isActive: false },
     { id: 4, name: "Петро", score: 70, isActive: true },
     { id: 5, name: "Анна", score: 88, isActive: false },
+    { id: 6, name: "Олег", isActive: true }
 ];

@@ -1,110 +1,61 @@
 import { useState } from 'react';
-import Post from './components/molecules/Post/Post';
-import SearchBar from './components/molecules/SearchBar/SearchBar';
-import { postsData, students } from './data';
+import Lab3 from './pages/Lab3';
+import Prac2 from './pages/Prac2';
+import Prac3 from './pages/Prac3';
 import styles from './App.module.css';
 
 function App() {
-    // === Стан для Лабораторної №3 ===
-    const [searchTerm, setSearchTerm] = useState('');
-    const [activeCategory, setActiveCategory] = useState('All');
+    // Стан для збереження активної вкладки. За замовчуванням показуємо Лаб 3.
+    const [activeWork, setActiveWork] = useState('lab3');
 
-    // Логіка фільтрації Лабораторної №3
-    const filteredPosts = postsData.filter(post => {
-        const matchesSearch = post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            post.author.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
-
-        return matchesSearch && matchesCategory;
+    // Допоміжна функція для стилізації активної кнопки
+    const getButtonStyle = (workName) => ({
+        padding: '10px 20px',
+        cursor: 'pointer',
+        backgroundColor: activeWork === workName ? '#007bff' : '#e9ecef',
+        color: activeWork === workName ? 'white' : 'black',
+        border: 'none',
+        borderRadius: '5px',
+        fontWeight: activeWork === workName ? 'bold' : 'normal',
+        transition: 'all 0.3s ease'
     });
 
-    // === Логіка для Практичної №2 ===
-    const sortedStudents = [...students].sort((a, b) => b.score - a.score);
-    const activeStudents = students.filter(student => student.isActive);
-    const averageScore = activeStudents.reduce((acc, curr) => acc + curr.score, 0) / activeStudents.length;
-
     return (
-        <div className={styles.appContainer} style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+        <div className={styles.appContainer} style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'sans-serif' }}>
 
-            {/* ================= ЛАБОРАТОРНА РОБОТА №3 ================= */}
-            <section style={{ marginBottom: '50px' }}>
-                <h1 style={{ textAlign: 'center' }}>Стрічка з фільтрацією</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '10px' }}>Моє портфоліо</h1>
+            <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px' }}>Оберіть роботу для перегляду</p>
 
-                <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+            {/* === НАВІГАЦІЙНЕ МЕНЮ === */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '30px', borderBottom: '2px solid #ccc', paddingBottom: '20px' }}>
+                <button
+                    style={getButtonStyle('lab3')}
+                    onClick={() => setActiveWork('lab3')}
+                >
+                    Лабораторна 3
+                </button>
 
-                {/* Кнопки категорій */}
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-                    {['All', 'News', 'Updates'].map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setActiveCategory(cat)}
-                            style={{
-                                padding: '8px 16px',
-                                borderRadius: '20px',
-                                border: 'none',
-                                cursor: 'pointer',
-                                backgroundColor: activeCategory === cat ? '#007bff' : '#e9ecef',
-                                color: activeCategory === cat ? 'white' : 'black'
-                            }}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
+                <button
+                    style={getButtonStyle('prac2')}
+                    onClick={() => setActiveWork('prac2')}
+                >
+                    Практична 2
+                </button>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map(post => <Post key={post.id} {...post} />)
-                    ) : (
-                        <p style={{ textAlign: 'center', color: '#666' }}>Нічого не знайдено за вашим запитом.</p>
-                    )}
-                </div>
-            </section>
+                <button
+                    style={getButtonStyle('prac3')}
+                    onClick={() => setActiveWork('prac3')}
+                >
+                    Практична 3
+                </button>
+            </div>
 
-            <hr style={{ margin: '40px 0' }} />
-
-            {/* ================= ПРАКТИЧНА РОБОТА №2 ================= */}
-            <section>
-                <h1 style={{ textAlign: 'center' }}>Практична №2: Трансформація масивів</h1>
-
-                <div style={{ display: 'flex', gap: '40px', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-
-                    <div>
-                        <h2>Усі студенти (відсортовані)</h2>
-                        <ul>
-                            {sortedStudents.map(student => (
-                                <li
-                                    key={student.id}
-                                    style={{
-                                        color: student.isActive ? 'black' : 'gray',
-                                        textDecoration: student.isActive ? 'none' : 'line-through'
-                                    }}
-                                >
-                                    {student.name} — {student.score} балів
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h2>Активні (бал > 60)</h2>
-                        <ul>
-                            {students
-                                .filter(student => student.isActive && student.score > 60)
-                                .map(student => (
-                                    <li key={student.id}>
-                                        {student.name} — {student.score} балів
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                </div>
-
-                <div style={{ marginTop: '20px', padding: '15px', background: '#e9ecef', borderRadius: '8px' }}>
-                    <h2>Статистика</h2>
-                    <p style={{ fontSize: '18px' }}>Середній бал активних студентів: <strong>{averageScore.toFixed(1)}</strong></p>
-                </div>
-            </section>
+            {/* === КОНТЕНТ (ВІДОБРАЖАЄТЬСЯ ТІЛЬКИ АКТИВНА РОБОТА) === */}
+            <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+                {activeWork === 'lab3' && <Lab3 />}
+                {activeWork === 'prac2' && <Prac2 />}
+                {activeWork === 'prac3' && <Prac3 />}
+            </div>
 
         </div>
     );
