@@ -1,26 +1,13 @@
 export const postsData = [
-    {
-        id: 1,
-        author: "User123",
-        avatar: "https://placehold.co/50",
-        content: "Це мій перший пост у новій соціальній мережі! React - це круто.",
-        date: "2 год тому",
-        likes: 5
-    },
-    {
-        id: 2,
-        author: "Admin",
-        avatar: "https://placehold.co/50",
-        content: "Сьогодні ми вивчаємо Lists & Keys. Не забувайте про унікальні ключі!",
-        date: "4 год тому",
-        likes: 12
-    },
-    {
-        id: 3,
-        author: "Student_KP",
-        avatar: "https://placehold.co/50",
-        content: "Лабораторна робота №2 виконується успішно.",
-        date: "1 день тому",
-        likes: 2
-    }
+    { id: 1, author: "User123", avatar: "https://placehold.co/50", content: "Це мій перший пост...", date: "2 год тому", likes: 5 },
+    { id: 2, author: "Admin", avatar: "https://placehold.co/50", content: "Сьогодні ми вивчаємо Lists & Keys.", date: "4 год тому", likes: 12 },
+    { id: 3, author: "Student_KP", avatar: "https://placehold.co/50", content: "Лабораторна робота №2 виконується успішно.", date: "1 день тому", likes: 2 }
+];
+
+export const students = [
+    { id: 1, name: "Олена", score: 95, isActive: true },
+    { id: 2, name: "Іван", score: 55, isActive: true },
+    { id: 3, name: "Марія", score: 80, isActive: false },
+    { id: 4, name: "Петро", score: 70, isActive: true },
+    { id: 5, name: "Анна", score: 88, isActive: false },
 ];
