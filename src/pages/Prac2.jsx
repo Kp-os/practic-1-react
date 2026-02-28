@@ -1,9 +1,12 @@
 import { students } from '../data';
 
 const Prac2 = () => {
+    // Тут масив статичний, без useState
     const sortedStudents = [...students].sort((a, b) => b.score - a.score);
     const activeStudents = students.filter(student => student.isActive);
-    const averageScore = activeStudents.reduce((acc, curr) => acc + curr.score, 0) / activeStudents.length;
+    const averageScore = activeStudents.length > 0
+        ? activeStudents.reduce((acc, curr) => acc + curr.score, 0) / activeStudents.length
+        : 0;
 
     return (
         <section>
