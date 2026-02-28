@@ -1,0 +1,7 @@
+.wrapper { display: flex; flex-direction: column; min-height: 100vh; font-family: sans-serif; }
+.navbar { display: flex; flex-wrap: wrap; gap: 15px; padding: 20px; background-color: #333; justify-content: center; }
+.link { color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; transition: 0.3s; }
+.link:hover { background-color: #555; }
+.active { background-color: #007bff !important; font-weight: bold; }
+.mainContent { flex: 1; padding: 20px; max-width: 900px; margin: 0 auto; width: 100%; }
+.footer { padding: 20px; text-align: center; background-color: #f1f1f1; margin-top: auto; }
